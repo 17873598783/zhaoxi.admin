@@ -52,7 +52,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { el } from 'element-plus/es/locale';
+import { ElMessage } from 'element-plus'
 const url = ref('/images/logo.0606fdd2.png')
 const boxbg = ref('/images/svgs/login-box-bg.svg')
 const form = reactive({
@@ -68,18 +68,31 @@ const rules = reactive<FormRules>({
 })
 const ruleFormRef = ref<FormInstance>();
 const onSubmit = async (ruleFormRef: FormInstance | undefined) => {
-    if(!ruleFormRef){
+    if (!ruleFormRef) {
         return;
     }
-    await ruleFormRef.validate(async(valid,fields)=>{
-        if(valid){
-            console.log("正在登录...");
-        }else{
-            console.log("校验不通过...");
+    await ruleFormRef.validate(async (valid, fields) => {
+        if (valid) {
+            ElMessage({
+                type: "success",
+                message: "正在登录..."
+            })
+        } else {
+            let errors: string = "";
+            fields?.userName?.forEach(ele => {
+                errors += ele.message + ";"
+            })
+            fields?.passWord?.forEach(ele => {
+                errors += ele.message + ";"
+            })
+            ElMessage({
+                type: "warning",
+                message: "校验不通过..." + errors
+            })
             console.log(fields);
         }
     })
-    
+
 };
 </script>
 <style lang="scss" scoped>
