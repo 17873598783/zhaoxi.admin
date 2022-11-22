@@ -16,7 +16,7 @@
                 <el-dropdown>
                     <span class="el-dropdown-link">
                         <!-- {{ NickName }} -->
-                            张三
+                        张三
                         <el-icon class="el-icon--right">
                             <arrow-down />
                         </el-icon>
@@ -35,11 +35,10 @@
     </el-row>
     <el-row>
         <el-col :span="24">
-            <el-tag>Tag 1</el-tag>
-            <el-tag class="ml-2" type="success">Tag 2</el-tag>
-            <el-tag class="ml-2" type="info">Tag 3</el-tag>
-            <el-tag class="ml-2" type="warning">Tag 4</el-tag>
-            <el-tag class="ml-2" type="danger">Tag 5</el-tag>
+            <el-tag v-for="tag in tags" :key="tag.name" class="mx-1" closable :type="tag.type"
+                :disable-transitions="false" @close="handleClose(tag)">
+                {{ tag.name }}
+            </el-tag>
         </el-col>
     </el-row>
 </template>
@@ -50,7 +49,17 @@ import { useRouter } from 'vue-router';
 
 const circleUrl = ref('/images/Person.jpg')
 const NickName = ref()
-const router = useRouter()
+const router = useRouter();
+const tags = ref([
+    { name: 'Tag 1', type: '' },
+    { name: 'Tag 2', type: 'success' },
+    { name: 'Tag 3', type: 'info' },
+    { name: 'Tag 4', type: 'warning' },
+    { name: 'Tag 5', type: 'danger' },
+])
+const handleClose = (tag:any) => {
+    tags.value.splice(tags.value.indexOf(tag), 1)
+}
 onMounted(() => {
     NickName.value = useStore().state.NickName
 })
