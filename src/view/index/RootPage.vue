@@ -51,6 +51,14 @@
                   <span>角色管理</span>
                 </template>
               </el-menu-item>
+              <el-menu-item index="/personmanager">
+                <template #title>
+                  <el-icon>
+                    <list />
+                  </el-icon>
+                  <span>用户管理</span>
+                </template>
+              </el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
