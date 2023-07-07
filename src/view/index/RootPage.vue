@@ -43,6 +43,14 @@
                   <span>菜单管理</span>
                 </template>
               </el-menu-item>
+              <el-menu-item index="/rolemanager">
+                <template #title>
+                  <el-icon>
+                    <list />
+                  </el-icon>
+                  <span>角色管理</span>
+                </template>
+              </el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
