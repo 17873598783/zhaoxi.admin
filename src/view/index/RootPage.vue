@@ -35,7 +35,7 @@
                   <span>信息编辑</span>
                 </template>
               </el-menu-item>
-              <el-menu-item index="/menumanager">
+              <!--  <el-menu-item index="/menumanager">
                 <template #title>
                   <el-icon>
                     <list />
@@ -58,7 +58,8 @@
                   </el-icon>
                   <span>用户管理</span>
                 </template>
-              </el-menu-item>
+              </el-menu-item> -->
+              <TreeMenuCom :list="res"></TreeMenuCom>
             </el-menu>
           </el-col>
         </el-row>
@@ -97,8 +98,74 @@ import { ref, onMounted, toRef } from 'vue'
 import HeaderCom from '../../components/HeaderCom.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import TreeMenuCom from '../../components/TreeMenu.vue'
 const url = ref('/images/logo.ico')
 url.value = "/images/logo.0606fdd2.png"
+const res = ref([
+    {
+        "id":1,
+        "index": "rolemanager",
+        "name": "角色管理",
+        "filePath":"../view/admin/role/RoleManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": null
+    },
+    {
+        "id":2,
+        "index": "personmanager",
+        "name": "人员管理",
+        "filePath":"../view/admin/person/PersonManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": null
+    },
+    {
+        "id":3,
+        "index": "menumanager",
+        "name": "菜单管理",
+        "filePath":"../view/admin/menu/MenuManager",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "children": null
+    },
+    {
+        "id":5,
+        "index": "test",
+        "name": "多层级菜单测试1",
+        "parent": "rolemanager",
+        "order": 99,
+        "date": "2016-05-02",
+        "isEnable": false,
+        "filePath":"test",
+        "children": [
+            {
+                "index": "test2",
+                "name": "权限列表2",
+                "children": [
+                    {
+                        "index": "test3",
+                        "name": "权限列表2-1"
+                    }
+                ]
+            },
+            {
+                "index": "test23",
+                "name": "权限列表3"
+            },
+            {
+                "index": "test24",
+                "name": "权限列表4"
+            }
+        ]
+    }
+]);
 
 onMounted(async () => {
 
